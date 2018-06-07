@@ -38,4 +38,8 @@ export class AuthProvider {
   getAuthenticatedUser() {
     return this.afAuth.authState;
   }
+
+  signOut() {
+    this.afAuth.auth.signOut();
+  }
 }

@@ -2,11 +2,16 @@
 
   <ion-navbar>
     <ion-title>Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="navigateToEditProfilePage()">Edit</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <profile-view></profile-view>
+  <profile-view (existingProfile)="getExistingProfile($event)"></profile-view>
+
+  <button ion-button block (click)="signOut()">Logout</button>
 </ion-content>

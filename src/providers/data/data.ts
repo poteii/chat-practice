@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject, AngularFireList } from 'angularfire2/database';
 import { User } from "firebase/app";
 import { Profile } from '../../models/profile/profile.interface';
+import { AuthProvider } from '../auth/auth';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/take';
 
 
 @Injectable()
@@ -11,7 +16,7 @@ export class DataProvider {
 
   profileList: AngularFireList<Profile>;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase, private auth: AuthProvider) {
   }
 
   //user => authenticated user of firebase, profile => current profile to save in database
@@ -38,5 +43,11 @@ export class DataProvider {
     return query.valueChanges();
 
   }
+
+  // getAuthenticatedUserProfile() {
+  //   return this.auth.getAuthenticatedUser()
+  //     .map(user => user.uid)
+  //     .mergeMap(authId => this.db.object('profiles/' + authId)).take(1);
+  // }
 
 }
